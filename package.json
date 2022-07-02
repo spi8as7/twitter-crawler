@@ -11,12 +11,22 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "build": "webpack",
+    "start": "node app.js",
+    "dev": "nodemon ./app.js localhost 3080"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "del": "^5.1.0",
     "dotenv": "^16.0.1",
-    "twitter": "^1.7.1"
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.0.1",
+    "nodemon": "^2.0.2",
+    "twitter": "^1.7.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^4.10.0",
+    "webpack-stream": "^5.2.1"
   }
 }

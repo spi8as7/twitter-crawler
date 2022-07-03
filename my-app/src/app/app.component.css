@@ -14,14 +14,9 @@
 .left {
   left: 0;
   width: 20%;
-  background-color: #0dcaf0;
+  background-color: #727374;
 }
 
-.right {
-  right: 0;
-  width: 80%;
-  background-color: white;
-}
 
 .centered {
   position: absolute;
@@ -30,3 +25,5 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
+

@@ -1,39 +1,37 @@
 <app-header></app-header>
 <div class="container">
-  <div class="row">
+  <div class="btn">
+    <button class="btn btn-warning" (click)="onPress()">Get All Searches</button>
+  </div>
+  
+  <div class="mrgnbtm" *ngIf="display">
+    <app-users [users]="users" (getUsersEvent)="getAllUsers()"></app-users>
+  </div>
     <div class="split left">
+      <h2>Search Twitter for a keyword</h2>
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="form-group col-md-8">
+            <input type="text" class="form-control" formControlName="keyword" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search for a keyword">
+            <br>
+            <mat-form-field>
+              <mat-label>From date</mat-label>
+              <input formControlName="start_time" matInput [matDatepicker]="picker1">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-label>To date</mat-label>
+              <input formControlName="end_time" matInput [matDatepicker]="picker2">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <button type="submit" [disabled]="!userForm.valid" class="btn btn-danger">Search</button>
+        </div>
+      </form>
       <app-display-board
         [users]="users"
         (getUsersEvent)="getAllUsers()">
       </app-display-board>
-    </div>
-    <div class="split right">
-      <h2>Create User</h2>
-      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label for="exampleInputEmail1">Keyword</label>
-            <input type="text" class="form-control" formControlName="keyword" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search for a keyword">
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="exampleInputPassword1">Start time</label>
-          <input type="text" class="form-control" formControlName="start_time" id="exampleInputPassword1" placeholder="2022-06-28T15:00:00z">
-        </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="exampleInputPassword1">End time</label>
-          <input type="text" class="form-control" formControlName="end_time" id="exampleInputPassword1" placeholder="2022-06-29T15:00:00z">
-        </div>
-      </div>
-        <button type="submit" [disabled]="!userForm.valid" class="btn btn-danger">Search</button>
-      </form>
-      <div class="btn">
-        <button class="btn btn-warning" (click)="onPress()">Get All Searches</button>
-      </div>
-      <div class="mrgnbtm" *ngIf="display">
-        <app-users [users]="users" (getUsersEvent)="getAllUsers()"></app-users>
-      </div> 
-    </div>
-  </div>
+    </div> 
 </div>

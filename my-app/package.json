@@ -27,6 +27,8 @@
     "@ngrx/store": "^9.0.0",
     "@ngrx/store-devtools": "^9.0.0",
     "bootstrap": "^4.1.1",
+    "chart.js": "^2.9.3",
+    "ng2-charts" : "^2.3.0",
     "mat-daterangepicker": "^1.0.1",
     "ngrx": "0.0.1-security",
     "ngrx-store-freeze": "^0.2.4",

@@ -15,7 +15,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgxTweetModule } from "ngx-tweet";
-import { environment } from '../environments/environment';
+import { ChartsModule } from 'ng2-charts';
+import { BarChartComponent } from './bar-chart.component';
+
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -30,7 +32,8 @@ import { environment } from '../environments/environment';
     HeaderComponent,
     DisplayBoardComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { environment } from '../environments/environment';
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxTweetModule,
+    ChartsModule,
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

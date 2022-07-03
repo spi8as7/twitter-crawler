@@ -13,6 +13,7 @@ export class AppComponent implements OnDestroy {
 
   display = false;
   display_result = false;
+  display_chart = false;
 
   constructor(private appService: AppService) {}
 
@@ -90,11 +91,11 @@ export class AppComponent implements OnDestroy {
       (error) => {                              //error() callback
         console.error('Request failed with error');
       })
-
   }
 
   openChart(){
-    
+    this.clearDisplays();
+    this.display_chart = true;
   }
 
   getSelectedSearch(selected_search_id:string) {
@@ -105,6 +106,7 @@ export class AppComponent implements OnDestroy {
   clearDisplays() {
     this.display_result = false;
     this.display = false;
+    this.display_chart = false;
   }
 
   onShowResult() {

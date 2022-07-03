@@ -19,6 +19,11 @@
   <div class="mrgnbtm" *ngIf="display">
     <app-users [users]="users" (getUsersEvent)="getAllUsers()"></app-users>
   </div>
+  <div class="mrgnbtm" *ngIf="display_chart">
+    <app-bar-chart
+      [user]="user">
+    </app-bar-chart>
+  </div>
     <div class="split left">
       <h2>Search Twitter for a keyword</h2>
       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">

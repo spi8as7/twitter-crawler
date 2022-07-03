@@ -1,7 +1,13 @@
 <app-header></app-header>
 <div class="container">
   <div class="row">
-    <div class="col-md-7 mrgnbtm">
+    <div class="split left">
+      <app-display-board
+        [users]="users"
+        (getUsersEvent)="getAllUsers()">
+      </app-display-board>
+    </div>
+    <div class="split right">
       <h2>Create User</h2>
       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="row">
@@ -22,16 +28,12 @@
       </div>
         <button type="submit" [disabled]="!userForm.valid" class="btn btn-danger">Search</button>
       </form>
-    </div>
-    <div class="col-md-4 mrgnbtm">
-      <app-display-board
-       [userCount]="userCount"
-       (getUsersEvent)="getAllUsers()"
-      >
-      </app-display-board>
+      <div class="btn">
+        <button class="btn btn-warning" (click)="onPress()">Get All Searches</button>
+      </div>
+      <div class="mrgnbtm" *ngIf="display">
+        <app-users [users]="users" (getUsersEvent)="getAllUsers()"></app-users>
+      </div> 
     </div>
   </div>
-</div>
-<div class="mrgnbtm">
-  <app-users *ngIf="users.length !== 0" [users]="users"></app-users>
 </div>

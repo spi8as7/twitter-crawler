@@ -3,18 +3,18 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>User Id</th>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th>Keyword</th>
+        <th>Total Searches</th>
+        <th>Total Likes</th>
+        <th>Date</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users; let i = index">
-        <td>{{i + 1}}</td>
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.email}}</td>
+        <td>{{user.keyword}}</td>
+        <td>{{user.total_results}}</td>
+        <td>{{user.total_likes}}</td>
+        <td>{{user.timestamp | date:'medium'}}</td>
       </tr>
     </tbody>
   </table>

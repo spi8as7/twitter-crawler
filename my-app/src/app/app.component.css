@@ -1,3 +1,32 @@
 .mrgnbtm {
-  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.split {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  width: 20%;
+  background-color: #0dcaf0;
+}
+
+.right {
+  right: 0;
+  width: 80%;
+  background-color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }

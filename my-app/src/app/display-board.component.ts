@@ -1,22 +1,25 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, } from '@angular/core';
+import { AppService } from './app.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-display-board',
   templateUrl: './display-board.component.html',
   styleUrls: ['./display-board.component.css']
 })
+
 export class DisplayBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
-  @Input() userCount = 0;
-  @Output() getUsersEvent = new EventEmitter();
+  @Input() users: any[];
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   ngOnInit(): void {
+    this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((users: any[]) => {
+      this.users = users;
+    });
   }
-
-  getAllUsers() {
-    this.getUsersEvent.emit('get all users');
-  }
-
 }

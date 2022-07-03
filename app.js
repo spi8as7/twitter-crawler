@@ -73,12 +73,30 @@ app.post('/search',  async (req, res) => {
     return res.json(200);
 })
 
+
+app.get('/search/:id', async (req, res) => {
+    //db.getCollection('searches').find({})
+    // Finding a document whose id=5ebadc45a99bde77b2efb20e
+    const id = req.params.id;
+    Search.findById(id, function (err, result) {
+        if (err){
+            return res.json(400)
+        }
+        else{
+            return res.json(result)
+        }
+    });
+})
+
+
+
 app.get('/search', async (req, res) => {
     //db.getCollection('searches').find({})
     var search_result = [];
     Search.find({}, function(err, searches) {
         searches.forEach(function(search) {
             search_result.push({
+                search_id: search['_id'],
                 keyword:search['keyword'],
                 search_result:search['search_result'],
                 total_results:search['total_results'],

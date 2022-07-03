@@ -1,4 +1,4 @@
-.display-board {
+/* .display-board {
   width: 100%;
   background-color: rgb(193, 236, 112);
   padding: 5%;
@@ -8,4 +8,70 @@
   color: red;
   font-size: 75px;
   text-align: center;
+} */
+
+
+.display-board {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+
+.display-board li {
+  display: flex;
+}
+
+.display-board button {
+  flex: 1;
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: stretch;
+  height: 1.8em;
+}
+
+.display-board button:hover {
+  color: #2c3a41;
+  background-color: #e6e6e6;
+  left: .1em;
+}
+
+.display-board button:active {
+  background-color: #525252;
+  color: #fafafa;
+}
+
+.display-board button.selected {
+  background-color: black;
+  color: white;
+}
+
+.display-board button.selected:hover {
+  background-color: #505050;
+  color: white;
+}
+
+.display-board button.selected:active {
+  background-color: black;
+  color: white;
+}
+
+.display-board .badge {
+  display: inline-block;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #405061;
+  line-height: 1em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+.display-board .name {
+  align-self: center;
 }

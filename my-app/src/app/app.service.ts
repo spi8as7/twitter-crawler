@@ -15,8 +15,11 @@ export class AppService {
   }
 
   addUser(user: any) {
-    return this.http.post(this.rootURL + '/search', {
-      "keyword": "test",
+    // convert to 
+    // "start_time": "2022-06-28T15:00:00z",
+    // "end_time": "2022-06-29T15:00:00z"
+    return this.http.post(this.rootURL + '/search',{
+      "keyword": user.keyword,
       "start_time": "2022-06-28T15:00:00z",
       "end_time": "2022-06-29T15:00:00z"
   });

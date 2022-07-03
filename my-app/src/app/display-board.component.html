@@ -1,9 +1,32 @@
-<div class="display-board">
-  <h4>Users Created</h4>
-  <div class="number">
-    {{userCount}}
-  </div>
-  <div class="btn">
-    <button class="btn btn-warning" (click)="getAllUsers()">Get All Users</button>
+<!-- <ul class="display-board"> -->
+  <!-- <h2>Results</h2> -->
+  <!-- <li *ngFor="let user of users"> -->
+    <!-- <button [class.selected]="user === selectedKeyword" type="button" (click)="onSelect(user)"> -->
+      <!-- <span >{{user.keyword}}</span> -->
+      <!-- <span >{{user.timestamp | date:'medium'}}</span> -->
+    <!-- </button> -->
+  <!-- </li> -->
+<!-- </ul> -->
+
+<!-- <button class="btn btn-primary">Test Button</button> -->
+
+<!-- <div *ngIf="selectedKeyword"> -->
+  <!-- <h2>{{selectedHero.name | uppercase}} Details</h2>
+  <div>id: {{selectedHero.id}}</div>
+  <div>
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+  </div> -->
+<!-- </div> -->
+<h2>Search results</h2>
+<br>
+<div class="list-group">
+  <div *ngFor="let user of users">
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{user.keyword}}</h5>
+        <small>{{user.timestamp | date:'medium'}}</small>
+      </div>
+    </a>
   </div>
 </div>

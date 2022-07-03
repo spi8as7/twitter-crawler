@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class AppComponent implements OnDestroy {
 
+  display = false;
   constructor(private appService: AppService) {}
 
   title = 'my-app';
@@ -22,22 +23,13 @@ export class AppComponent implements OnDestroy {
   });
 
   users: any[] = [];
-  userCount = 0;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   onSubmit() {
-
-    // console.log('keyword::::',this.userForm.value.keyword);
-    // this.userCount = this.userCount + 1;
-    // this.users.push(this.userForm.value.keyword)
-    // console.log('keyword::::',this.users)
-    // console.log(this.userForm.ur)
     this.appService.addUser(this.userForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      console.log('message::::', data);
-      this.userCount = this.userCount + 1;
-      console.log(this.userCount);
       this.userForm.reset();
+      this.getAllUsers();
     });
   }
 
@@ -45,7 +37,10 @@ export class AppComponent implements OnDestroy {
     this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((users: any[]) => {
         this.users = users;
     });
-    this.userCount = this.users.length;
+  }
+
+  onPress() {
+    this.display = !this.display;
   }
 
   ngOnDestroy() {

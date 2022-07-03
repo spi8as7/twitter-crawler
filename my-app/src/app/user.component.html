@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Result</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Author</th>
+          <th>Text</th>
+          <th>Retweets</th>
+          <th>Replies</th>
+          <th>Likes</th>
+          <th>Quotes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of user.search_result;">
+            <td><img src={{result.author.data.profile_image_url}}></td>
+            <td>{{result.text}}</td>
+            <td>{{result.public_metrics.retweet_count}}</td>
+            <td>{{result.public_metrics.reply_count}}</td>
+            <td>{{result.public_metrics.like_count}}</td>
+            <td>{{result.public_metrics.quote_count}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

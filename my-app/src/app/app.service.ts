@@ -25,4 +25,8 @@ export class AppService {
   });
   }
 
+  getUser(user_id: string) {
+    return this.http.get(this.rootURL + '/search/' + user_id);
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { AppService } from './app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -11,9 +11,12 @@ import { Subject } from 'rxjs';
 
 export class DisplayBoardComponent implements OnInit {
 
+  selectedItem : any;
+
   constructor(private appService: AppService) { }
 
   @Input() users: any[];
+  @Output() selectedSearchEvent = new EventEmitter<string>();
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -22,4 +25,10 @@ export class DisplayBoardComponent implements OnInit {
       this.users = users;
     });
   }
+
+  selectedSearch(value: string) {
+    console.log(value);
+    this.selectedSearchEvent.emit(value);
+  }
+
 }

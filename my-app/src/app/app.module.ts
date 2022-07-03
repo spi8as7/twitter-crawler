@@ -9,11 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { DisplayBoardComponent } from './display-board.component';
 import { UsersComponent } from './users.component';
+import { UserComponent } from './user.component';
 import { MatDatepickerModule ,} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDaterangepickerModule } from 'mat-daterangepicker';
+import { NgxTweetModule } from "ngx-tweet";
 import { environment } from '../environments/environment';
 
 // state related imports
@@ -28,7 +29,8 @@ import { environment } from '../environments/environment';
     AppComponent,
     HeaderComponent,
     DisplayBoardComponent,
-    UsersComponent
+    UsersComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { environment } from '../environments/environment';
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
+    NgxTweetModule,
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

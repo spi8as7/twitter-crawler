@@ -2,8 +2,20 @@
 <div class="container">
   <div class="btn">
     <button class="btn btn-warning" (click)="onPress()">Get All Searches</button>
+  </div> 
+  <div class="btn">
+    <button class="btn btn-warning" (click)="onShowResult()">Get Result</button>
   </div>
-  
+  <div class="btn">
+    <button class="btn btn-warning" (click)="openChart()">Charts</button>
+  </div>
+  <div class="mrgnbtm" *ngIf="display_result">
+    <app-user
+    [user]="user"
+    (getUserEvent)="getUser()">
+    </app-user>
+  </div>
+  <!-- <ngx-tweet tweetId="1542160958432346113"></ngx-tweet> -->
   <div class="mrgnbtm" *ngIf="display">
     <app-users [users]="users" (getUsersEvent)="getAllUsers()"></app-users>
   </div>
@@ -31,7 +43,8 @@
       </form>
       <app-display-board
         [users]="users"
-        (getUsersEvent)="getAllUsers()">
+        (getUsersEvent)="getAllUsers()"
+        (selectedSearchEvent)="getSelectedSearch($event)">
       </app-display-board>
     </div> 
 </div>

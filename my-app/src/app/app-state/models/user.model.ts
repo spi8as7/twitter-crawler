@@ -1,4 +1,5 @@
 export class User {
+  id: string;
   keyword: string;
   start_time: string;
   end_time: string;

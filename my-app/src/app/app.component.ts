@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
 export class AppComponent implements OnDestroy {
 
   display = false;
+  display_result = false;
+
   constructor(private appService: AppService) {}
 
   title = 'my-app';
@@ -23,6 +25,9 @@ export class AppComponent implements OnDestroy {
   });
 
   users: any[] = [];
+  user: any;
+  selected_search_id: string;
+  
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -76,8 +81,41 @@ export class AppComponent implements OnDestroy {
     });
   }
 
+  getUser() {
+    this.appService.getUser(this.selected_search_id).subscribe(
+      (response) => {                           //next() callback
+        console.log(response);
+        this.user = response; 
+      },
+      (error) => {                              //error() callback
+        console.error('Request failed with error');
+      })
+
+  }
+
+  openChart(){
+    
+  }
+
+  getSelectedSearch(selected_search_id:string) {
+    console.log(selected_search_id);
+    this.selected_search_id=selected_search_id;
+  }
+
+  clearDisplays() {
+    this.display_result = false;
+    this.display = false;
+  }
+
+  onShowResult() {
+    this.getUser();
+    this.clearDisplays()
+    this.display_result = true;
+  }
+
   onPress() {
-    this.display = !this.display;
+    this.clearDisplays();
+    this.display = true;
   }
 
   ngOnDestroy() {
@@ -85,3 +123,4 @@ export class AppComponent implements OnDestroy {
     this.destroy$.unsubscribe();
   }
 }
+

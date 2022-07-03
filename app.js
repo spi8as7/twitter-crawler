@@ -58,7 +58,16 @@ app.post('/search',  async (req, res) => {
         });    
 
     //timestamp format    RFC 3339
-    const data = jsTweets['_realData']['data'] 
+    let data = jsTweets['_realData']['data'] 
+    for (i = 0; i < data.length; i++) {
+        console.log(data[i]['author_id']);
+        const author = await client.v2.user(data[i]['author_id'], { 'user.fields': ['profile_image_url'] });
+        console.log(author);
+        delete data[i]['author_id'];
+        data[i]['author'] = author;
+    } 
+
+    
 
     const search_schema = new Search ({
         keyword: keyword,

@@ -17,7 +17,7 @@ export class AppComponent implements OnDestroy {
 
   constructor(private appService: AppService) {}
 
-  title = 'my-app';
+  title = 'twitter-crawler-front';
 
   userForm = new FormGroup({
     keyword: new FormControl('', Validators.nullValidator && Validators.required),

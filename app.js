@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(process.cwd()+"/my-app/dist/angular-nodejs-example/"));
+app.use(express.static(process.cwd()+"/twitter-crawler-front/dist/angular-nodejs-example/"));
 
 const client = new TwitterApi({
     appKey: process.env.TWITTER_CONSUMER_KEY,
@@ -152,7 +152,7 @@ app.get('/search', async (req, res) => {
 })
 
 app.get('/', (req,res) => {
-    res.sendFile(process.cwd()+"/my-app/dist/angular-nodejs-example/index.html")
+    res.sendFile(process.cwd()+"/twitter-crawler-front/dist/angular-nodejs-example/index.html")
 });
 
 var server = app.listen(3080, function () {

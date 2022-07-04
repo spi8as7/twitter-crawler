@@ -1,4 +1,4 @@
-import { Component , Input, OnInit } from '@angular/core';
+import { Component , Input, Output, EventEmitter } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { User} from '../app/app-state/models/user.model';
@@ -9,40 +9,47 @@ import { User} from '../app/app-state/models/user.model';
   styleUrls: ['./bar-chart.component.css']
 })
 
-export class BarChartComponent implements OnInit{
+export class BarChartComponent {
 
-  constructor() { }
-
+  constructor () { }
   @Input() user: User;
 
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
   barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }
+    { data: [], label: '' }
   ];
 
-  ngOnInit(): void {
-    let days = this.user.search_result;
-    
-    for (let i = 0; i < days.length; i++) {
-        days[i].created_at.setMilliseconds(0);
-        days[i].created_at.setSeconds(0);
-        days[i].created_at.setMinutes(0);
-        days[i].created_at.setHours(0);
-        console.log(days[i]['created_at']);
+  ngOnInit () {
+    // build a per day tweets dictionary based on search results
+    const days_result = this.user.search_result;
+    let unique_days = {};
+    for (let i = 0; i < days_result.length; i++) {
+        const date = days_result[i]['created_at'].substring(0, days_result[i]['created_at'].indexOf('T'));
+        if (date in unique_days) {
+            unique_days[date] += 1;
+        } else {
+            unique_days[date] = 1;
+        }
     }
+    // delete init values
+    this.barChartLabels.pop();
+    this.barChartData.pop();
 
-    const unique_days = Array.from(new Set(days));
-    console.log(unique_days);
-    this.barChartData = [
-        { data: [0, 37, 0, 0, 46, 33], label: 'Best Fruits' }
-      ];
-  }
+    const keys = Object.keys(unique_days);
+    let chart_data = [];
+    keys.forEach(function(key){
+        chart_data.push(unique_days[key])
+    });
 
-  
+    // update chart
+    this.barChartLabels= keys;
+    this.barChartData.push(
+        { data: chart_data, label: 'Tweets' });   
+    } 
 }

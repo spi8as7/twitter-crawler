@@ -44,10 +44,47 @@ function calculateTotalLikes(tweets) {
     return total_likes
 }
 
+function datesAreValid(start_time,end_time) {
+    const current_time = new Date();
+    const time_limit = new Date(current_time);
+    time_limit.setDate(time_limit.getDate() - 7);
+
+    let result = {
+        "status": true,            
+        "message": ""
+    };
+    if ((start_time > current_time) || (end_time > current_time)) {
+        result['message'] = "Can't provide data for future date";
+        result['status'] = false;
+        return result; 
+    }
+
+    if (end_time <= start_time) {
+        result['message'] = "End_time should be greater than the start_time";
+        result['status'] = false;
+        return result;
+    }
+
+    if((start_time < time_limit) || (end_time < time_limit)) {
+        result['message'] = "Twitter API can provide data only for the last 7 days";
+        result['status'] = false;
+        return result;
+    }
+    return result;
+}
+
 app.post('/search',  async (req, res) => {
     let {keyword,start_time,end_time,timestamp} = req.body ;
 
     const tweet_fields = ['author_id','created_at','id','public_metrics']
+    const date_validation = datesAreValid(new Date(start_time),new Date(end_time));
+    console.log(date_validation);
+    if (!date_validation['status']) {
+        return res.status(400).json({
+            "reason": date_validation['message']
+        }); 
+    }
+    
     const jsTweets = 
         await client.v2.search(keyword,
         {
@@ -57,6 +94,11 @@ app.post('/search',  async (req, res) => {
             'tweet.fields':tweet_fields
         });    
 
+    // Definely provide better Error message based on Twitter API  
+    if (jsTweets['error']) {
+        return res.status(jsTweets['code']); 
+    }
+
     //timestamp format    RFC 3339
     let data = jsTweets['_realData']['data'] 
     for (i = 0; i < data.length; i++) {
@@ -65,9 +107,7 @@ app.post('/search',  async (req, res) => {
         console.log(author);
         delete data[i]['author_id'];
         data[i]['author'] = author;
-    } 
-
-    
+    }     
 
     const search_schema = new Search ({
         keyword: keyword,
@@ -78,29 +118,23 @@ app.post('/search',  async (req, res) => {
     });
 
     search_schema.save();
-    
-    return res.json(200);
+    return res.status(200);
 })
 
 
 app.get('/search/:id', async (req, res) => {
-    //db.getCollection('searches').find({})
-    // Finding a document whose id=5ebadc45a99bde77b2efb20e
     const id = req.params.id;
     Search.findById(id, function (err, result) {
         if (err){
-            return res.json(400)
+            return res.status(400)
         }
         else{
-            return res.json(result)
+            return res.status(200).json(result)
         }
     });
 })
 
-
-
 app.get('/search', async (req, res) => {
-    //db.getCollection('searches').find({})
     var search_result = [];
     Search.find({}, function(err, searches) {
         searches.forEach(function(search) {
@@ -113,7 +147,7 @@ app.get('/search', async (req, res) => {
                 timestamp:search['timestamp']
             })
         });
-        return res.json(search_result);
+        return res.status(200).json(search_result);
     });
 })
 

@@ -17,31 +17,29 @@ export class AppComponent implements OnDestroy {
 
   constructor(private appService: AppService) {}
 
-  title = 'my-app';
+  title = 'twitter-crawler-front';
 
-  userForm = new FormGroup({
+  searchForm = new FormGroup({
     keyword: new FormControl('', Validators.nullValidator && Validators.required),
     start_time: new FormControl('', Validators.nullValidator && Validators.required),
     end_time: new FormControl('', Validators.nullValidator && Validators.required)
   });
 
-  users: any[] = [];
-  user: any;
+  searches: any[] = [];
+  search: any;
   selected_search_id: string;
-  
-
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   onSubmit() {
     const current_time = new Date();
     let time_limit = new Date();
     time_limit.setDate(current_time.getDate() - 7);
-    let start_time = this.userForm.value.start_time;
+    let start_time = this.searchForm.value.start_time;
     start_time.setHours(current_time.getHours());
     start_time.setMinutes(current_time.getMinutes());
     start_time.setSeconds(current_time.getSeconds());
     start_time.setMilliseconds(current_time.getMilliseconds());
-    let end_time = this.userForm.value.end_time;
+    let end_time = this.searchForm.value.end_time;
     end_time.setHours(current_time.getHours());
     end_time.setMinutes(current_time.getMinutes());
     end_time.setSeconds(current_time.getSeconds());
@@ -49,46 +47,45 @@ export class AppComponent implements OnDestroy {
 
     if ((start_time > current_time) || (end_time > current_time)) {
       alert("Can't provide data for future date");
-      this.userForm.reset();
+      this.searchForm.reset();
       return; 
     }
 
     if (start_time > end_time) {
       alert("Starting time should be greater than the ending time");
-      this.userForm.reset();
+      this.searchForm.reset();
       return;
     }
 
     if((start_time < time_limit) || (end_time < time_limit)) {
       alert("Twitter API can provide data only for the last 7 days");
-      this.userForm.reset();
+      this.searchForm.reset();
       return;
     }
     
-    this.userForm.patchValue(
-      { start_time:this.userForm.value.start_time.toISOString(),
-        end_time:this.userForm.value.end_time.toISOString() 
+    this.searchForm.patchValue(
+      { start_time:this.searchForm.value.start_time.toISOString(),
+        end_time:this.searchForm.value.end_time.toISOString() 
       });
 
-    this.appService.addUser(this.userForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      this.userForm.reset();
-      this.getAllUsers();
+    this.appService.addSearch(this.searchForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
+      this.searchForm.reset();
+      this.getAllSearches();
     });
   }
 
-  getAllUsers() {
-    this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((users: any[]) => {
-        this.users = users;
+  getAllSearches() {
+    this.appService.getSearches().pipe(takeUntil(this.destroy$)).subscribe((searches: any[]) => {
+        this.searches = searches;
     });
   }
 
-  getUser() {
-    this.appService.getUser(this.selected_search_id).subscribe(
-      (response) => {                           //next() callback
-        console.log(response);
-        this.user = response; 
+  getSearch() {
+    this.appService.getSearch(this.selected_search_id).subscribe(
+      (response) => {                           
+        this.search = response; 
       },
-      (error) => {                              //error() callback
+      (error) => {                             
         console.error('Request failed with error');
       })
   }
@@ -110,7 +107,7 @@ export class AppComponent implements OnDestroy {
   }
 
   onShowResult() {
-    this.getUser();
+    this.getSearch();
     this.clearDisplays()
     this.display_result = true;
   }

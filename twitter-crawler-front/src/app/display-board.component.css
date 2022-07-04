@@ -1,16 +1,3 @@
-/* .display-board {
-  width: 100%;
-  background-color: rgb(193, 236, 112);
-  padding: 5%;
-}
-
-.number {
-  color: red;
-  font-size: 75px;
-  text-align: center;
-} */
-
-
 .display-board {
   margin: 0 0 2em 0;
   list-style-type: none;

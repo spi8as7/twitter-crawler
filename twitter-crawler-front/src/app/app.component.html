@@ -10,23 +10,23 @@
     <button class="btn btn-warning" (click)="openChart()">Charts</button>
   </div>
   <div class="mrgnbtm" *ngIf="display_result">
-    <app-user
-    [user]="user"
-    (getUserEvent)="getUser()">
-    </app-user>
+    <app-search
+    [search]="search"
+    (getsearchEvent)="getSearch()">
+    </app-search>
   </div>
   <!-- <ngx-tweet tweetId="1542160958432346113"></ngx-tweet> -->
   <div class="mrgnbtm" *ngIf="display">
-    <app-users [users]="users" (getUsersEvent)="getAllUsers()"></app-users>
+    <app-searches [searches]="searches" (getSearchesEvent)="getAllSearches()"></app-searches>
   </div>
   <div class="mrgnbtm" *ngIf="display_chart">
     <app-bar-chart
-      [user]="user">
+      [search]="search">
     </app-bar-chart>
   </div>
     <div class="split left">
       <h2>Search Twitter for a keyword</h2>
-      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
           <div class="form-group col-md-8">
             <input type="text" class="form-control" formControlName="keyword" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Search for a keyword">
             <br>
@@ -43,12 +43,12 @@
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
-            <button type="submit" [disabled]="!userForm.valid" class="btn btn-danger">Search</button>
+            <button type="submit" [disabled]="!searchForm.valid" class="btn btn-danger">Search</button>
         </div>
       </form>
       <app-display-board
-        [users]="users"
-        (getUsersEvent)="getAllUsers()"
+        [searches]="searches"
+        (getSearchesEvent)="getAllSearches()"
         (selectedSearchEvent)="getSelectedSearch($event)">
       </app-display-board>
     </div> 

@@ -1,4 +1,4 @@
-export class User {
+export class Search {
   id: string;
   keyword: string;
   start_time: string;

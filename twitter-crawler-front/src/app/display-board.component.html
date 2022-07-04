@@ -1,0 +1,8 @@
+<h2>Keywords history</h2>
+<br>
+<ul id="grouplist" class="list-group">
+  <li class="list-group-item" [ngClass]="{'active': selectedItem == search}" 
+  (click)="selectedSearch(search.search_id)" *ngFor="let search of searches">
+     {{ search.keyword }} <span>{{search.timestamp | date:'medium'}}</span>
+  </li>
+ </ul>

@@ -1,7 +1,7 @@
-import { Component , Input, Output, EventEmitter } from '@angular/core';
+import { Component , Input,} from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { User} from '../app/app-state/models/user.model';
+import { Search} from './app-state/models/search.model';
 
 @Component({
   selector: 'app-bar-chart',
@@ -12,7 +12,7 @@ import { User} from '../app/app-state/models/user.model';
 export class BarChartComponent {
 
   constructor () { }
-  @Input() user: User;
+  @Input() search: Search;
 
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -27,7 +27,7 @@ export class BarChartComponent {
 
   ngOnInit () {
     // build a per day tweets dictionary based on search results
-    const days_result = this.user.search_result;
+    const days_result = this.search.search_result;
     let unique_days = {};
     for (let i = 0; i < days_result.length; i++) {
         const date = days_result[i]['created_at'].substring(0, days_result[i]['created_at'].indexOf('T'));

@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let result of user.search_result;">
+        <tr *ngFor="let result of search.search_result;">
             <td><img src={{result.author.data.profile_image_url}}></td>
             <td>{{result.text}}</td>
             <td>{{result.public_metrics.retweet_count}}</td>

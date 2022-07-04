@@ -15,19 +15,18 @@ export class DisplayBoardComponent implements OnInit {
 
   constructor(private appService: AppService) { }
 
-  @Input() users: any[];
+  @Input() searches: any[];
   @Output() selectedSearchEvent = new EventEmitter<string>();
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   ngOnInit(): void {
-    this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((users: any[]) => {
-      this.users = users;
+    this.appService.getSearches().pipe(takeUntil(this.destroy$)).subscribe((searches: any[]) => {
+      this.searches = searches;
     });
   }
 
   selectedSearch(value: string) {
-    console.log(value);
     this.selectedSearchEvent.emit(value);
   }
 

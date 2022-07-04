@@ -1,1 +1,1 @@
-export { User } from './user.model';
+export { Search } from './search.model';

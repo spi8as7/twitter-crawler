@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { DisplayBoardComponent } from './display-board.component';
-import { UsersComponent } from './users.component';
-import { UserComponent } from './user.component';
+import { SearchesComponent } from './searches.component';
+import { SearchComponent } from './search.component';
 import { MatDatepickerModule ,} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule  } from '@angular/material/form-field';
@@ -31,8 +31,8 @@ import { BarChartComponent } from './bar-chart.component';
     AppComponent,
     HeaderComponent,
     DisplayBoardComponent,
-    UsersComponent,
-    UserComponent,
+    SearchesComponent,
+    SearchComponent,
     BarChartComponent,
   ],
   imports: [

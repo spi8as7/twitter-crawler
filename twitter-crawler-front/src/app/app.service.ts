@@ -10,23 +10,21 @@ export class AppService {
 
   rootURL = '';
 
-  getUsers() {
+  getSearches() {
     return this.http.get(this.rootURL + '/search');
   }
 
-  addUser(user: any) {
-    // convert to 
-    // "start_time": "2022-06-28T15:00:00z",
-    // "end_time": "2022-06-29T15:00:00z"
+  addSearch(search: any) {
+    // convert to format ?
     return this.http.post(this.rootURL + '/search',{
-      "keyword": user.keyword,
-      "start_time": "2022-06-28T15:00:00z",
-      "end_time": "2022-06-29T15:00:00z"
+      "keyword": search.keyword,
+      "start_time": search.start_time,
+      "end_time": search.end_time
   });
   }
 
-  getUser(user_id: string) {
-    return this.http.get(this.rootURL + '/search/' + user_id);
+  getSearch(search_id: string) {
+    return this.http.get(this.rootURL + '/search/' + search_id);
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Users</h2>
+  <h2>Searches</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -10,11 +10,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users; let i = index">
-        <td>{{user.keyword}}</td>
-        <td>{{user.total_results}}</td>
-        <td>{{user.total_likes}}</td>
-        <td>{{user.timestamp | date:'medium'}}</td>
+      <tr *ngFor="let search of searches; let i = index">
+        <td>{{search.keyword}}</td>
+        <td>{{search.total_results}}</td>
+        <td>{{search.total_likes}}</td>
+        <td>{{search.timestamp | date:'medium'}}</td>
       </tr>
     </tbody>
   </table>

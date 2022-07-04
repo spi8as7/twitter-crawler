@@ -84,11 +84,11 @@ export class AppComponent implements OnDestroy {
 
   getUser() {
     this.appService.getUser(this.selected_search_id).subscribe(
-      (response) => {                           //next() callback
+      (response) => {                           
         console.log(response);
         this.user = response; 
       },
-      (error) => {                              //error() callback
+      (error) => {                             
         console.error('Request failed with error');
       })
   }

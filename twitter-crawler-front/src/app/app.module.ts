@@ -46,6 +46,7 @@ import { BarChartComponent } from './bar-chart.component';
     MatFormFieldModule,
     MatInputModule,
     ChartsModule,
+    NgxTweetModule,
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

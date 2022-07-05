@@ -1,4 +1,12 @@
 <div class="container">
+
+  <!-- <ngx-tweet tweetId="1542160958432346113"></ngx-tweet> -->
+
+  <!-- <blockquote class="twitter-tweet">
+    <a href="https://twitter.com/x/status/807811447862468608"></a> 
+  </blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  -->
+
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -11,7 +19,7 @@
         </tr>
       </thead>
       <tbody class="table bg-light">
-        <tr *ngFor="let result of search.search_result;">
+        <tr *ngFor="let result of search.search_result;" (click)="onClick(result.id)" style="cursor: pointer;font-weight: bold;">
             <td><img src={{result.author.data.profile_image_url}}></td>
             <td>{{result.text}}</td>
             <td>{{result.public_metrics.retweet_count}}</td>
@@ -21,5 +29,23 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  
+
+    <div class="modal" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" (click) = "hide()">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <ngx-tweet tweetId="{{twitt_id}}"></ngx-tweet>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "hide()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -15,5 +15,4 @@ export class SearchesComponent implements OnInit {
   ngOnInit(): void {
     this.getSearchesEvent.emit('get all searches');
   }
-
 }

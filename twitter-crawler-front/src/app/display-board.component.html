@@ -1,30 +1,8 @@
 <h2>Keywords history</h2>
 <br>
-<ul id="grouplist" class="list-group">
-  <li class="list-group-item" [ngClass]="{'active': selectedItem == search}" 
+<div id="keywords">
+  <li id="{{search.search_id}}" class="list-group-item" [ngClass]="{'active': selectedItem == search}" 
   (click)="selectedSearch(search.search_id)" *ngFor="let search of searches">
      {{ search.keyword }} <span>{{search.timestamp | date:'medium'}}</span>
   </li>
- </ul>
-<!-- 
-<h2>Keywords history</h2>
-<br>
-<div class="list-group">
-  <div *ngFor="let search of searches;let i = index"  (click)="selectedSearch(search.search_id)" >
-      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" [ngClass]="{'active': selectedItem == search}">
-         <div class="d-flex w-100 justify-content-between" [attr.id]="'keyword' + i">
-            <h5 class="mb-1">{{search.keyword}}</h5>
-            <small>{{search.timestamp | date:'medium'}}</small>
-         </div>
-      </a>
-   </div> 
-</div>  -->
-
-
-<!-- 
-<ul id="grouplist" class="list-group">
-  <li class="list-group-item" [ngClass]="{'active': selected == user}" (click)="onSelected($event, user)" *ngFor="let user of users">
-    {{user.keyword}} <span>{{user.timestamp | date:'medium'}}</span>
-  </li>
-</ul> -->
-
+</div>

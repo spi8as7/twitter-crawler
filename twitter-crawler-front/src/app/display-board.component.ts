@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { AppService } from './app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Listener } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-display-board',
@@ -27,9 +28,13 @@ export class DisplayBoardComponent implements OnInit {
   }
 
   selectedSearch(value: string) {
-    const app = document.getElementById("keyword1");
-    // app.ap
-    // app.toggleClass('active');
+    let keywords = document.getElementById("keywords").getElementsByTagName("li");
+    for (let i = 0; i < keywords.length ; i++ ) {
+      keywords[i].style.backgroundColor = "white";
+      if (keywords[i].id.toString() == value) {
+        keywords[i].style.backgroundColor = "#b7d7e8";
+      }
+    }
     this.selectedSearchEvent.emit(value);
   }
 

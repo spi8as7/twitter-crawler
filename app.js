@@ -74,7 +74,7 @@ function datesAreValid(start_time,end_time) {
 }
 
 app.post('/search',  async (req, res) => {
-    let {keyword,start_time,end_time,timestamp} = req.body ;
+    let {keyword,start_time,end_time} = req.body ;
 
     const tweet_fields = ['author_id','created_at','id','public_metrics']
     const date_validation = datesAreValid(new Date(start_time),new Date(end_time));
@@ -83,8 +83,7 @@ app.post('/search',  async (req, res) => {
             "reason": date_validation['message']
         }); 
     }
-    console.log(start_time);
-    console.log(end_time);
+
     const jsTweets = 
         await client.v2.search(keyword,
         {
@@ -119,7 +118,7 @@ app.get('/search/:id', async (req, res) => {
     const id = req.params.id;
     Search.findById(id, function (err, result) {
         if (err){
-            return res.status(400)
+            return res.status(400).json({message:"Not found"})
         }
         else{
             return res.status(200).json(result)

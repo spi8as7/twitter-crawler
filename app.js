@@ -78,13 +78,13 @@ app.post('/search',  async (req, res) => {
 
     const tweet_fields = ['author_id','created_at','id','public_metrics']
     const date_validation = datesAreValid(new Date(start_time),new Date(end_time));
-    console.log(date_validation);
     if (!date_validation['status']) {
         return res.status(400).json({
             "reason": date_validation['message']
         }); 
     }
-    
+    console.log(start_time);
+    console.log(end_time);
     const jsTweets = 
         await client.v2.search(keyword,
         {
@@ -94,17 +94,10 @@ app.post('/search',  async (req, res) => {
             'tweet.fields':tweet_fields
         });    
 
-    // Definely provide better Error message based on Twitter API  
-    if (jsTweets['error']) {
-        return res.status(jsTweets['code']); 
-    }
-
     //timestamp format    RFC 3339
     let data = jsTweets['_realData']['data'] 
     for (i = 0; i < data.length; i++) {
-        console.log(data[i]['author_id']);
         const author = await client.v2.user(data[i]['author_id'], { 'user.fields': ['profile_image_url'] });
-        console.log(author);
         delete data[i]['author_id'];
         data[i]['author'] = author;
     }     

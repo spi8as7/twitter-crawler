@@ -27,6 +27,9 @@ export class DisplayBoardComponent implements OnInit {
   }
 
   selectedSearch(value: string) {
+    const app = document.getElementById("keyword1");
+    // app.ap
+    // app.toggleClass('active');
     this.selectedSearchEvent.emit(value);
   }
 

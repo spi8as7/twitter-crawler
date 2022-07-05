@@ -1,17 +1,16 @@
 <div class="container">
-    <h2>Result</h2>
-    <table class="table table-bordered">
-      <thead>
+    <table class="table">
+      <thead class="thead-dark">
         <tr>
-          <th>Author</th>
-          <th>Text</th>
+          <th>User</th>
+          <th> </th>
           <th>Retweets</th>
           <th>Replies</th>
           <th>Likes</th>
           <th>Quotes</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table bg-light">
         <tr *ngFor="let result of search.search_result;">
             <td><img src={{result.author.data.profile_image_url}}></td>
             <td>{{result.text}}</td>
